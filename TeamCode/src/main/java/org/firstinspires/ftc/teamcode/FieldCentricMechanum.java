@@ -106,6 +106,11 @@ public class FieldCentricMechanum extends LinearOpMode {
 
             controller.setPID(p, i, d);
             int slidePos = leftLinearMotor.getCurrentPosition();
+
+            if (slidePos < 0) {
+                slidePos = 0;
+            }
+
             double pid = controller.calculate(slidePos, target);
 
             double power = pid + f;
@@ -115,7 +120,6 @@ public class FieldCentricMechanum extends LinearOpMode {
 
             telemetry.addData("pos: ", startingPos);
             telemetry.addData("target: ", target);
-            telemetry.update();
             // This button choice was made so that it is hard to hit on accident,
             // it can be freely changed based on preference.
             // The equivalent button is start on Xbox-style controllers.
@@ -140,12 +144,12 @@ public class FieldCentricMechanum extends LinearOpMode {
             double frontRightPower = (y - x - rx) / denominator;
             double backRightPower = (y + x - rx) / denominator;
 
-            RightFrontMotor.setPower(frontRightPower*0.9);
-            RightBackMotor.setPower(backRightPower*0.9);
-            LeftFrontMotor.setPower(frontLeftPower*0.9);
-            LeftBackMotor.setPower(backLeftPower*0.9);
+            RightFrontMotor.setPower(frontRightPower * 0.9);
+            RightBackMotor.setPower(backRightPower * 0.9);
+            LeftFrontMotor.setPower(frontLeftPower * 0.9);
+            LeftBackMotor.setPower(backLeftPower * 0.9);
 
-            telemetry.addData("Left Slide: ", leftLinearMotor.getCurrentPosition());
+            telemetry.addData("Left Slide: ", slidePos);
             telemetry.addData("Right Slide: ", rightLinearMotor.getCurrentPosition());
 
             telemetry.addData("Left Target: ", slidesTargetPosition);
@@ -153,6 +157,8 @@ public class FieldCentricMechanum extends LinearOpMode {
 
             telemetry.addData("Left Power: ", leftLinearMotor.getPower());
             telemetry.addData("Right Power: ", rightLinearMotor.getPower());
+
+            telemetry.update();
 
             // double p = 0.025;
             // double target = slidesTargetPosition;
@@ -162,27 +168,26 @@ public class FieldCentricMechanum extends LinearOpMode {
 
             if (gamepad2.right_bumper) {
 
-                LeftHorizontalSlide.setPosition(0.7);
-                RightHorizontalSlide.setPosition(0.3);
+                LeftHorizontalSlide.setPosition(0.4);
+                RightHorizontalSlide.setPosition(0.6);
 
                 //
-
-                rightWrist.setPosition(0);
-                leftWrist.setPosition(1);
+                rightWrist.setPosition(0.2);
+                leftWrist.setPosition(0.8);
 
                 leftIntakeWrist.setPosition(0.4);
                 rightIntakeWrist.setPosition(0.6);
             } else {
-                LeftHorizontalSlide.setPosition(0.45);
-                RightHorizontalSlide.setPosition(0.55);
+                LeftHorizontalSlide.setPosition(0.05);
+                RightHorizontalSlide.setPosition(0.95);
 
                 //
 
-                rightWrist.setPosition(0.5);
-                leftWrist.setPosition(0.5);
+                rightWrist.setPosition(0.7);
+                leftWrist.setPosition(0.3);
 
-                leftIntakeWrist.setPosition(0.7);
-                rightIntakeWrist.setPosition(0.3);
+                leftIntakeWrist.setPosition(0.75);
+                rightIntakeWrist.setPosition(0.25);
             }
 
 //            if (gamepad2.circle) {
@@ -212,11 +217,15 @@ public class FieldCentricMechanum extends LinearOpMode {
 //            }
 
             if (gamepad2.dpad_up) {
-                leftTransferArm.setPosition(0);
+                leftTransferArm.setPosition(0.9);
+            } else {
+                leftTransferArm.setPosition(0.25);
+            }
+
+            if (gamepad2.left_bumper) {
                 rightTransferArm.setPosition(1);
             } else {
-                leftTransferArm.setPosition(0.85);
-                rightTransferArm.setPosition(0.15);
+                rightTransferArm.setPosition(0);
             }
 
             if (gamepad2.circle) {
@@ -258,8 +267,10 @@ public class FieldCentricMechanum extends LinearOpMode {
 
             if (gamepad2.right_trigger != 0) {
                 target = 4200;
+                f = 0.25;
             } else {
                 target = startingPos;
+                f = 0;
             }
         }
     }

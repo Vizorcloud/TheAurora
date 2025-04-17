@@ -64,17 +64,17 @@ public class OdometryAuto extends LinearOpMode {
         rightLinearMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightLinearMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        LeftHorizontalSlide.setPosition(0.1);
-        RightHorizontalSlide.setPosition(0.9);
+        LeftHorizontalSlide.setPosition(0);
+        RightHorizontalSlide.setPosition(0.95);
 
-        rightWrist.setPosition(0.5);
-        leftWrist.setPosition(0.5);
+        rightWrist.setPosition(0.7);
+        leftWrist.setPosition(0.3);
 
         leftIntakeWrist.setPosition(0.75);
         rightIntakeWrist.setPosition(0.25);
 
-        leftTransferArm.setPosition(0.85);
-        rightTransferArm.setPosition(0.15);
+        leftTransferArm.setPosition(0.25);
+        rightTransferArm.setPosition(0);
 
         leftClaw.setPosition(0);
         rightClaw.setPosition(1);
@@ -83,54 +83,55 @@ public class OdometryAuto extends LinearOpMode {
 
         Actions.runBlocking(
                 drive.actionBuilder(new Pose2d(0, 0, 0))
-                        .strafeToSplineHeading(new Vector2d(9, 17), -(Math.toRadians(60)))
+                        .strafeToSplineHeading(new Vector2d(8, 15), -(Math.toRadians(45)))
                         .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.8, 0.2))
                         .waitSeconds(0.5)
                         .stopAndAdd(new SlideAction(4150))
-                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0, 1))
-                        .waitSeconds(1)
-                        .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.2, 0.8))
-                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.85, 0.15))
-                        .stopAndAdd(new SlideAction(startingPos))
-                        //
-                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 1, 0))
-                        .stopAndAdd(new ServoAction(leftIntakeWrist, rightIntakeWrist, 0.45, 0.55))
-                        .stopAndAdd(new CRServoAction(leftIntake, rightIntake, -1, 1))
-                        .strafeToSplineHeading(new Vector2d(10, 10), (Math.toRadians(20)))
-                        .strafeToSplineHeading(new Vector2d(30, 10), (Math.toRadians(20)))
-                        //
-                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 0.5, 0.5))
-                        .stopAndAdd(new ServoAction(leftIntakeWrist, rightIntakeWrist, 0.75, 0.25))
-                        .strafeToSplineHeading(new Vector2d(9, 17), -(Math.toRadians(60)))
-                        .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.8, 0.2))
-                        .waitSeconds(0.5)
-                        .stopAndAdd(new SlideAction(4150))
-                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0, 1))
+                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.9, 0))
                         .waitSeconds(1)
                         .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.2, 0.8))
                         .waitSeconds(0.25)
-                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.85, 0.15))
+                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.25, 0))
                         .stopAndAdd(new SlideAction(startingPos))
                         //
-                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 1, 0))
-                        .stopAndAdd(new ServoAction(leftIntakeWrist, rightIntakeWrist, 0.45, 0.55))
+                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 0.8, 0.2))
+                        .stopAndAdd(new ServoAction(leftIntakeWrist, rightIntakeWrist, 0.4, 0.6))
                         .stopAndAdd(new CRServoAction(leftIntake, rightIntake, -1, 1))
-                        .strafeToSplineHeading(new Vector2d(10, 20), (Math.toRadians(20)))
-                        .strafeToSplineHeading(new Vector2d(30, 20), (Math.toRadians(20)))
-                        //
-                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 0.5, 0.5))
+                        .strafeToSplineHeading(new Vector2d(10, 9), (Math.toRadians(0)))
+                        .strafeToSplineHeading(new Vector2d(30, 9), (Math.toRadians(0)))
+//                        //
+                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 0.3, 0.7))
                         .stopAndAdd(new ServoAction(leftIntakeWrist, rightIntakeWrist, 0.75, 0.25))
-                        .strafeToSplineHeading(new Vector2d(9, 17), -(Math.toRadians(60)))
+                        .strafeToSplineHeading(new Vector2d(8, 15), -(Math.toRadians(45)))
                         .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.8, 0.2))
                         .waitSeconds(0.5)
                         .stopAndAdd(new SlideAction(4150))
-                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0, 1))
+                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.9, 0))
                         .waitSeconds(1)
                         .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.2, 0.8))
-                        .waitSeconds(0.5)
-                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.85, 0.15))
+                        .waitSeconds(0.25)
+                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.25, 0))
                         .stopAndAdd(new SlideAction(startingPos))
-                        .waitSeconds(20)
+//                        //
+                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 0.8, 0.2))
+                        .stopAndAdd(new ServoAction(leftIntakeWrist, rightIntakeWrist, 0.4, 0.6))
+                        .stopAndAdd(new CRServoAction(leftIntake, rightIntake, -1, 1))
+                        .strafeToSplineHeading(new Vector2d(10, 20), (Math.toRadians(0)))
+                        .strafeToSplineHeading(new Vector2d(30, 20), (Math.toRadians(0)))
+//                        //
+                        .stopAndAdd(new ServoAction(leftWrist, rightWrist, 0.3, 0.7))
+                        .stopAndAdd(new ServoAction(leftIntakeWrist, rightIntakeWrist, 0.75, 0.25))
+                        .strafeToSplineHeading(new Vector2d(8, 15), -(Math.toRadians(45)))
+                        .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.8, 0.2))
+                        .waitSeconds(0.5)
+                        .stopAndAdd(new SlideAction(4150))
+                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.9, 0))
+                        .waitSeconds(1)
+                        .stopAndAdd(new ServoAction(leftClaw, rightClaw, 0.2, 0.8))
+                        .waitSeconds(0.25)
+                        .stopAndAdd(new ServoAction(leftTransferArm, rightTransferArm, 0.25, 0))
+                        .stopAndAdd(new SlideAction(startingPos))
+                       // DONT
 //                        .strafeTo(new Vector2d(0, 10))
 //                        .strafeTo(new Vector2d(3, 0))
 //                        //
